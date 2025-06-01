@@ -1,7 +1,11 @@
 import sqlite3
+import os
 
-# Connect to your SQLite database
-conn = sqlite3.connect('image_predictions.db')
+
+DB_PATH = os.path.join(os.path.dirname(__file__), "image_predictions.db")
+
+# Connect to SQLite database
+conn = sqlite3.connect(DB_PATH)
 cursor = conn.cursor()
 
 # Query to select all records

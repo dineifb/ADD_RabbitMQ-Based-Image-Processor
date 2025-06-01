@@ -1,34 +1,24 @@
 import pika
-import json
 import os
+import json
 
-# Path to test image directory (adjust this!)
-TEST_DIR = "raw_test_images"  # e.g., "data/test"
+IMAGE_DIR = "raw_test_images"
 
-# Connect to RabbitMQ
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channel = connection.channel()
-
-# Declare the queue
 channel.queue_declare(queue='raw_data')
 
-# Get all image files from the directory
-image_files = [f for f in os.listdir(TEST_DIR) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
-
-for image_name in image_files:
-    file_path = os.path.abspath(os.path.join(TEST_DIR, image_name))
-    
-    data = {
-        "image_name": image_name,
-        "file_path": file_path
-    }
-
-    # Send to RabbitMQ
-    channel.basic_publish(
-        exchange='',
-        routing_key='raw_data',
-        body=json.dumps(data)
-    )
-    print(f"[Producer] Sent: {data}")
+for image_name in os.listdir(IMAGE_DIR):
+    if image_name.lower().endswith((".jpg", ".jpeg", ".png")):
+        message = {
+            "image_name": image_name.strip().lower(),
+            "file_path": f"{IMAGE_DIR}/{image_name}"
+        }
+        channel.basic_publish(
+            exchange='',
+            routing_key='raw_data',
+            body=json.dumps(message)
+        )
+        print(f"[Producer] Sent metadata for: {image_name}")
 
 connection.close()
