@@ -73,7 +73,7 @@ def consume_raw_data():
     connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
     channel.queue_declare(queue='raw_data')
-    channel.basic_consume(queue='raw_data', on_message_callback=handle_raw_data, auto_ack=True)
+    channel.basic_consume(queue='raw_data', on_message_callback=handle_raw_data, auto_ack=False)
     print("[Uploader] Waiting for raw_data...")
     channel.start_consuming()
 
@@ -81,7 +81,7 @@ def consume_processed_data():
     connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
     channel.queue_declare(queue='processed_data')
-    channel.basic_consume(queue='processed_data', on_message_callback=handle_processed_data, auto_ack=True)
+    channel.basic_consume(queue='processed_data', on_message_callback=handle_processed_data, auto_ack=False)
     print("[Uploader] Waiting for processed_data...")
     channel.start_consuming()
 

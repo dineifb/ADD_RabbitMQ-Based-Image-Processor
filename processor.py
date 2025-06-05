@@ -57,7 +57,7 @@ connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channel = connection.channel()
 channel.queue_declare(queue='raw_data')
 channel.queue_declare(queue='processed_data')
-channel.basic_consume(queue='raw_data', on_message_callback=callback, auto_ack=True)
+channel.basic_consume(queue='raw_data', on_message_callback=callback, auto_ack=False)
 
 print("[Processor] Waiting for image metadata...")
 channel.start_consuming()

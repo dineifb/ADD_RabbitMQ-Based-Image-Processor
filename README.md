@@ -1,5 +1,7 @@
 # How it works
 
+pip install -r requirements.txt
+
 ## Run in separate terminals:
 
 python uploader.py
@@ -41,7 +43,7 @@ sudo rabbitmqctl purge_queue processed_data
 
 ## Run the presenter API (query predictions via web):
 
-pip install -r requirements.txt
+
 uvicorn presenter_api:app --reload
 
 # Endpoints:

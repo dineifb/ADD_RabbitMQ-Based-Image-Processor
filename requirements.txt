@@ -3,3 +3,6 @@ tensorflow
 fastapi
 uvicorn
 jinja2
+Pillow
+aio-pika
+aiosqlite
