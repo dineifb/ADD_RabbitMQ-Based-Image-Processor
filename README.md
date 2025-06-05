@@ -38,3 +38,16 @@ python init_db.py
 sudo rabbitmqctl purge_queue raw_data
 
 sudo rabbitmqctl purge_queue processed_data
+
+## Run the presenter API (query predictions via web):
+
+pip install -r requirements.txt
+uvicorn presenter_api:app --reload
+
+# Endpoints:
+#   /predictions                -> Returns all predictions as JSON
+#   /predictions/{image_name}   -> Returns the prediction of a given image as JSON
+
+# Web UI:
+#   http://127.0.0.1:8000/      http://127.0.0.1:8000/predictions/html 
+You can see the forecasts in tabular form

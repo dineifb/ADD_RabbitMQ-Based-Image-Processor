@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predictions Table</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; }
+        h1 { text-align: center; }
+        table { margin: 30px auto; border-collapse: collapse; width: 90%; background: #fff; box-shadow: 0 2px 8px #ccc; }
+        th, td { padding: 10px 14px; border: 1px solid #ddd; text-align: center; }
+        th { background: #0077cc; color: #fff; }
+        tr:nth-child(even) { background: #f2f2f2; }
+        tr:hover { background: #e0f7fa; }
+        .none { color: #aaa; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>Image Predictions</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image Name</th>
+                <th>File Path</th>
+                <th>Prediction</th>
+                <th>Confidence</th>
+                <th>Processed At</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in predictions %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{% if row[3] %}{{ row[3] }}{% else %}<span class="none">-</span>{% endif %}</td>
+                <td>{% if row[4] is not none %}{{ row[4] }}{% else %}<span class="none">-</span>{% endif %}</td>
+                <td>{% if row[5] %}{{ row[5] }}{% else %}<span class="none">-</span>{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html> 
