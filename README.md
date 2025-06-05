@@ -44,7 +44,7 @@ sudo rabbitmqctl purge_queue processed_data
 ## Run the presenter API (query predictions via web):
 
 
-uvicorn presenter_api:app --reload
+uvicorn presenter:app --reload
 
 # Endpoints:
 #   /predictions                -> Returns all predictions as JSON
